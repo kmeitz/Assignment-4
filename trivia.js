@@ -8,6 +8,7 @@ $("#nextButton").hide();
 var score = 0; 
 var questionNum = 0;
 var first = 1;
+var remainQ = 10;
 
 $("#score").html(score);
 nbutton = $("#nextButton");
@@ -43,7 +44,7 @@ $("#restartButton").show();
 
 
 
-$("#div1").html("Question " + first + ": " + data.results[questionNum].question);
+$("#div1").html("Question " + first +  ": " + data.results[questionNum].question + "\n You have " + remainQ + " questions remaining.") ;
 
 // Restart button function
 rbutton.click(function restart() {
@@ -75,10 +76,10 @@ else { // If the true button is clicked"
     $("#nextButton").show();
     fbutton.hide();
     tbutton.hide();
-  
+    remainQ -= 1;
     
     
-    $("#div1").html("Question " + first + ": " + " The correct answer is " + data.results[questionNum].correct_answer + ".");
+    $("#div1").html("Question " + first + ": " + " The correct answer is " + data.results[questionNum].correct_answer + "." + " \n You have " + remainQ + " questions remaining.");
     
     if (data.results[questionNum].correct_answer == `True` ) {
       score += 1;
@@ -86,6 +87,7 @@ else { // If the true button is clicked"
     }
     questionNum += 1;
   first += 1;
+  
 });
 // When the next button is clicked.
 nbutton.click(function NextClick() {
@@ -100,7 +102,7 @@ nbutton.click(function NextClick() {
   tbutton.show();
   fbutton.show();
   nbutton.hide();
-  $("#div1").html("Question " + first + ": " + data.results[questionNum].question);
+  $("#div1").html("Question " + first + ": " + data.results[questionNum].question + "\n You have " + remainQ + " questions remaining.");
  }
 }); // when the false button is clicked
 fbutton.click(function FalseClick() {
@@ -108,8 +110,8 @@ fbutton.click(function FalseClick() {
   $("#nextButton").show();
   fbutton.hide();
   tbutton.hide();
-  
-  $("#div1").html("Question " + first + ": " + " The correct answer is " + data.results[questionNum].correct_answer + ".");
+  remainQ -= 1;
+  $("#div1").html("Question " + first + ": " + " The correct answer is " + data.results[questionNum].correct_answer + "." + " You have " + remainQ + " questions remaining.");
   
   if (data.results[questionNum].correct_answer == `False` ) {
     score += 1;
@@ -117,6 +119,7 @@ fbutton.click(function FalseClick() {
   }
   questionNum += 1;
   first += 1;
+ 
 });
 
 
@@ -130,21 +133,3 @@ fbutton.click(function FalseClick() {
     }); 
   })
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-    
-    
